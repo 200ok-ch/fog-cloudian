@@ -6,9 +6,13 @@ module Fog
       recognizes :host, :port, :path, :persistent, :ssl_verify_peer
 
       request_path 'fog/cloudian/requests/iam'
+
       request :create_group
       request :delete_group
-      # request :create_user
+
+      request :create_user
+      request :delete_user
+
       # request :create_credentials
       # request :get_group
       # request :get_user
@@ -16,8 +20,8 @@ module Fog
       # request :set_user_qos
 
 
-      model_path 'fog/cloudian/models/iam'
-      model       :group
+      # model_path 'fog/cloudian/models/iam'
+      # model       :group
       # collection  :groups
       # model       :user
       # collection  :users
@@ -38,7 +42,11 @@ module Fog
           @ssl_verify_peer = true if options[:ssl_verify_peer] != false
 
           url = "https://#{@host}:#{@port}#{@path}"
-          params = {user: @user, password: @password, ssl_verify_peer: @ssl_verify_peer}
+          params = { user: @user,
+                     password: @password,
+                     # NOTE: cloudians error messages always seem to be HTML
+                     # :headers => {"Accept" => "application/json"},
+                     ssl_verify_peer: @ssl_verify_peer }
           @connection = Fog::Core::Connection.new(url, @persistent, params)
         end
 
