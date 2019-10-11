@@ -1,4 +1,4 @@
-require "fog/core"
+require 'fog/core'
 require 'fog/xml'
 require 'fog/json'
 
@@ -10,9 +10,11 @@ module Fog
   module Cloudian
     extend Fog::Provider
 
-    autoload :IAM, File.expand_path('../cloudian/iam', __FILE__)
+    autoload :Admin, File.expand_path('../cloudian/admin', __FILE__)
+    autoload :Storage, File.expand_path('../cloudian/storage', __FILE__)
 
-    service(:iam, 'IAM')
+    service(:admin, 'Admin')
+    service(:storage, 'Storage')
 
     class Error < StandardError; end
     # Your code goes here...

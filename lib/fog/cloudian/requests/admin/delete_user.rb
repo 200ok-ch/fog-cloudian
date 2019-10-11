@@ -1,6 +1,6 @@
 module Fog
   module Cloudian
-    class IAM
+    class Admin
       class Real
         def delete_user(user_name, group_name)
           request(:delete, 'user', nil, { userId: user_name, groupId: group_name })

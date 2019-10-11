@@ -1,8 +1,8 @@
 module Fog
   module Cloudian
-    class IAM
+    class Admin
       class Real
-        # require 'fog/cloudian/parsers/iam/create_group'
+        # require 'fog/cloudian/parsers/admin/create_group'
 
         def create_group(group_name)
           request(:put, 'group', { groupId: group_name })

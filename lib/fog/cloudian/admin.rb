@@ -1,26 +1,29 @@
 module Fog
   module Cloudian
-    class IAM < Fog::Service
+    class Admin < Fog::Service
 
       requires :user, :password
       recognizes :host, :port, :path, :persistent, :ssl_verify_peer
 
-      request_path 'fog/cloudian/requests/iam'
+      request_path 'fog/cloudian/requests/admin'
 
+      # group
       request :create_group
+      request :get_group
       request :delete_group
 
+      # user
       request :create_user
+      request :get_user
+      request :update_user
       request :delete_user
+      request :set_password
+      request :create_credentials
 
-      # request :create_credentials
-      # request :get_group
-      # request :get_user
-      # request :set_group_qos
-      # request :set_user_qos
+      # qos
+      request :set_qos_limits
 
-
-      # model_path 'fog/cloudian/models/iam'
+      # model_path 'fog/cloudian/models/admin'
       # model       :group
       # collection  :groups
       # model       :user
