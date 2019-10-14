@@ -48,24 +48,33 @@ module Fog
           params = { user: @user,
                      password: @password,
                      # NOTE: cloudians error messages always seem to be HTML
-                     # :headers => {"Accept" => "application/json"},
+                     headers: {"Accept" => "application/json"},
                      ssl_verify_peer: @ssl_verify_peer }
           @connection = Fog::Core::Connection.new(url, @persistent, params)
         end
 
         def request(method, path, payload, query=nil)
-          params = { method: method, path: path }
+          # NOTE: on success cloudian always returns a 200, they don't
+          # know any other status codes, nor redirects
+          params = { method: method, path: path, expects: [200] }
           params[:body] = Fog::JSON.encode(payload) if payload
           params[:query] = query if query
 
           response = @connection.request(params)
 
           if response.body.empty?
-            response
+            :success_with_empty_body
           else
-            Fog::JSON.decode(response.body)
+            case response.headers['Content-Type']
+            when /^application\/json/
+              # puts response.body
+              Fog::JSON.decode(response.body)
+            else
+              response.headers['Content-Type']
+            end
           end
           # rescue Excon::Errors::HTTPStatusError => error
+          #   error
         end
       end
 

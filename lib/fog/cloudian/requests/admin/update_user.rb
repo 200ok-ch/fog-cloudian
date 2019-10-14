@@ -2,12 +2,15 @@ module Fog
   module Cloudian
     class Admin
       class Real
-        # require 'fog/cloudian/parsers/admin/update_user'
+        def update_user(user_details)
+          # The `user_details` must either have `canonicalUserId` XOR
+          # (`userId` AND `groupId`). @cloudian: What are you doing?
+          if user_details["canonicalUserId"]
+            user_details.delete("userId")
+            user_details.delete("groupId")
+          end
 
-        def update_user(user_name, group_name, user_details)
-          request(:post, 'user', { userId: user_name,
-                                  groupId: group_name,
-                                  userType: 'User' })
+          request(:post, 'user', user_details)
         end
       end
     end

@@ -4,8 +4,7 @@ module Fog
       class Real
         def delete_user(user_name, group_name)
           request(:delete, 'user', nil, { userId: user_name, groupId: group_name })
-          # NOTE: in contrast to the documentation this may also
-          # return a `409 Conflict`
+          # the response is 200 with an empty body
         end
       end
     end
