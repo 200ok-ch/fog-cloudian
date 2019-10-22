@@ -68,4 +68,4 @@ cloudian.requests # => [[nil, :create_group], [nil, :get_group], [nil, :delete_g
 
 ## License
 
-see [[LICENSE.md]]
+see [LICENSE.md](LICENSE.md)
