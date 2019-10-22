@@ -4,7 +4,7 @@ This is a Fog API wrapper for the Cloudian Hyperstore REST APIs (Admin
 & S3). For S3 this is just a shim for fog-aws.
 
 Currently about 13% (10 out of 77 API calls) of the Admin API are
-covered. Hence there is plenty of oppurtinityt for some FOSS
+covered. Hence there is plenty of opportunity for some FOSS
 contribution here.
 
 Also this library does not provide proper mock requests, yet. Which
